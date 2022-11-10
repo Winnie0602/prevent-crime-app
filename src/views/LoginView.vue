@@ -66,14 +66,13 @@ export default {
       }
       const resUserList = await projectFirestore.collection("UserList").get();
       if (this.displayView === "註冊") {
-        resUserList.docs.forEach(e => {
-          const eachUser = e["_delegate"]["_document"].data.value.mapValue.fields;
-          if (eachUser.account.stringValue === this.account) {
+        const tempString = resUserList.docs.filter(e => {
+          return e["_delegate"]["_document"].data.value.mapValue.fields.account.stringValue === this.account})
+          if (tempString.length !== 0) {
             alert("帳號名稱重複，請重新輸入帳號");
-            return;
-          } 
-        })
-        this.addAccount(body);
+          } else {
+            this.addAccount(body);
+          }
       } else {
         let isLogin = false;
         resUserList.docs.forEach(e => {
