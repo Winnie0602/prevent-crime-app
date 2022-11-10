@@ -72,8 +72,8 @@ export default {
             alert("帳號名稱重複，請重新輸入帳號");
             return;
           } 
-          this.addAccount(body);
         })
+        this.addAccount(body);
       } else {
         let isLogin = false;
         resUserList.docs.forEach(e => {
@@ -89,6 +89,7 @@ export default {
       }
     },
     async addAccount(body) {
+      console.log(1)
       const res = await projectFirestore.collection("UserList").add(body);
       if (res["_delegate"].path) {
         store.commit("setAccount", this.account);
