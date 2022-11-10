@@ -42,7 +42,7 @@ export default {
         logout() {
             store.commit("setAccount", "")
             store.commit("setAccountId", "")
-            this.$router.push("/login")
+            this.$router.push("/")
         }
     }
 
